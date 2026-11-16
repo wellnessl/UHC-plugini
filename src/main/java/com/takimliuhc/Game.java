@@ -355,7 +355,7 @@ public final class Game {
       p.setGameMode(GameMode.SURVIVAL);
       p.getInventory().clear();
 
-      for(PotionEffect e : new ArrayList(p.getActivePotionEffects())) {
+      for(PotionEffect e : new ArrayList<PotionEffect>(p.getActivePotionEffects())) {
          p.removePotionEffect(e.getType());
       }
 
@@ -663,7 +663,7 @@ public final class Game {
             p.setGlowing(false);
             p.setGameMode(GameMode.SURVIVAL);
 
-            for(PotionEffect e : new ArrayList(p.getActivePotionEffects())) {
+            for(PotionEffect e : new ArrayList<PotionEffect>(p.getActivePotionEffects())) {
                p.removePotionEffect(e.getType());
             }
 

@@ -135,9 +135,9 @@ public final class GameSidebar {
             copy.setSuffix(source.getSuffix());
             copy.setAllowFriendlyFire(source.allowFriendlyFire());
             copy.setCanSeeFriendlyInvisibles(source.canSeeFriendlyInvisibles());
-            HashSet<String> expectedEntries = new HashSet(source.getEntries());
+            HashSet<String> expectedEntries = new HashSet<String>(source.getEntries());
 
-            for(String entry : new HashSet(copy.getEntries())) {
+            for(String entry : new HashSet<String>(copy.getEntries())) {
                if (!expectedEntries.contains(entry)) {
                   copy.removeEntry(entry);
                }
@@ -151,7 +151,7 @@ public final class GameSidebar {
          }
       }
 
-      for(Team copy : new ArrayList(scoreboard.getTeams())) {
+      for(Team copy : new ArrayList<Team>(scoreboard.getTeams())) {
          if (copy.getName().startsWith("uhc_") && !activeTeams.contains(copy.getName())) {
             copy.unregister();
          }

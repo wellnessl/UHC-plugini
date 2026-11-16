@@ -28,7 +28,7 @@ public final class TeamManager {
       this.plugin = plugin;
       Scoreboard sb = Bukkit.getScoreboardManager().getMainScoreboard();
 
-      for(Team t : new ArrayList(sb.getTeams())) {
+      for(Team t : new ArrayList<Team>(sb.getTeams())) {
          if (t.getName().startsWith("uhc_")) {
             t.unregister();
          }
@@ -137,7 +137,7 @@ public final class TeamManager {
 
    public void removeOffline() {
       for(UTeam t : this.all()) {
-         for(UUID id : new ArrayList(t.members.keySet())) {
+         for(UUID id : new ArrayList<UUID>(t.members.keySet())) {
             if (Bukkit.getPlayer(id) == null) {
                this.removeMember(t, id);
             }

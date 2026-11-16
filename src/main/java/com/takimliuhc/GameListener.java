@@ -79,14 +79,13 @@ public final class GameListener implements Listener {
       Entity entity = e.getEntity();
       if (entity instanceof Player victim) {
          Entity entity2 = e.getDamager();
-         if (entity2 instanceof Player damager) {
-            ;
-         } else {
-            Projectile projectile;
-            ProjectileSource projectileSource;
-            if (entity2 instanceof Projectile && (projectileSource = (projectile = (Projectile)entity2).getShooter()) instanceof Player) {
-               Player shooter;
-               damager = shooter = (Player)projectileSource;
+         Player damager = null;
+         if (entity2 instanceof Player p) {
+            damager = p;
+         } else if (entity2 instanceof Projectile projectile) {
+            ProjectileSource projectileSource = projectile.getShooter();
+            if (projectileSource instanceof Player shooter) {
+               damager = shooter;
             }
          }
 
