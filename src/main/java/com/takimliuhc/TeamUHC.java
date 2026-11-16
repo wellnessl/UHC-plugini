@@ -28,8 +28,34 @@ public final class TeamUHC extends JavaPlugin {
    private Game game;
    private NamespacedKey goldenHeadKey;
 
+   private static final int LOOT_VERSION = 2;
+
+   // Eski config.yml'deki airdrop listesini jar'daki yeni listeyle bir kez günceller.
+   private void updateAirdropLoot() {
+      if (this.getConfig().getInt("airdrops.loot-version", 1) >= LOOT_VERSION) {
+         return;
+      }
+
+      try (java.io.InputStream in = this.getResource("config.yml")) {
+         if (in == null) {
+            return;
+         }
+
+         org.bukkit.configuration.file.YamlConfiguration def = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(
+            new java.io.InputStreamReader(in, StandardCharsets.UTF_8)
+         );
+         this.getConfig().set("airdrops.loot", def.getStringList("airdrops.loot"));
+         this.getConfig().set("airdrops.loot-version", LOOT_VERSION);
+         this.saveConfig();
+         this.getLogger().info("Airdrop loot listesi yeni sürüme güncellendi.");
+      } catch (java.io.IOException ex) {
+         this.getLogger().warning("Airdrop loot listesi güncellenemedi: " + ex.getMessage());
+      }
+   }
+
    public void onEnable() {
       this.saveDefaultConfig();
+      this.updateAirdropLoot();
       this.goldenHeadKey = new NamespacedKey(this, "golden_head");
       this.teams = new TeamManager(this);
       this.game = new Game(this);
