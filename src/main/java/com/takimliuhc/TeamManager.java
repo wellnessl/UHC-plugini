@@ -165,7 +165,8 @@ public final class TeamManager {
             this.plugin.send(from, "team-invite-sent", "%player%", to.getName());
             this.plugin.send(to, "team-invite-received", "%player%", from.getName(), "%team%", t.display());
             int timeout = this.plugin.getConfig().getInt("teams.invite-timeout", 30);
-            Bukkit.getScheduler().runTaskLater(this.plugin, () -> this.invites.remove(to.getUniqueId(), t), (long)timeout * 20L);
+            UTeam invitedTeam = t;
+            Bukkit.getScheduler().runTaskLater(this.plugin, () -> this.invites.remove(to.getUniqueId(), invitedTeam), (long)timeout * 20L);
          }
       }
    }
